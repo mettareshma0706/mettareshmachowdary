@@ -1,0 +1,291 @@
+<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Sharing Platform</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+    }
+
+    header {
+      background-color: #4CAF50;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    header .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+    }
+
+    header nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    
+    #hero {
+      background: #ff7b7b;
+      color: white;
+      padding: 30px;
+      text-align: center;
+    }
+
+    #hero h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    #hero p {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    #recipe-list {
+      padding: 30px 15px;
+    }
+
+    #recipe-list h2 {
+      text-align: center;
+    }
+
+    #recipes-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .recipe-card {
+      background-color: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 15px;
+      text-align: center;
+    }
+
+    .recipe-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .recipe-card h3 {
+      margin-top: 10px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .recipe-card .difficulty {
+      margin-top: 5px;
+      font-style: italic;
+      color: #888;
+    }
+
+    .recipe-card .rating {
+      margin-top: 10px;
+    }
+
+    #upload {
+      padding: 30px 15px;
+      background-color: #f9f9f9;
+    }
+
+    #upload h2 {
+      text-align: center;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    form label {
+      margin: 10px 0 5px;
+    }
+
+    form input, form select, form textarea {
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    form button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background-color: #45a049;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">RecipeShare</div>
+    <nav>
+      <a href="#home">Home</a>
+      <a href="#upload">Upload a Recipe</a>
+    </nav>
+  </header>
+
+  <section id="hero">
+    <h1>Welcome to RecipeShare!</h1>
+    <p>Share your favorite recipes with the world.</p>
+  </section>
+
+  <section id="recipe-list">
+    <h2>Popular Recipes</h2>
+    <div id="recipes-container">
+          </div>
+  </section>
+
+  <section id="upload">
+    <h2>Upload a Recipe</h2>
+    <form id="upload-form">
+      <label for="recipe-name">Recipe Name:</label>
+      <input type="text" id="recipe-name" required>
+
+      <label for="recipe-image">Recipe Image URL:</label>
+      <input type="text" id="recipe-image" required>
+
+      <label for="ingredients">Ingredients (comma separated):</label>
+      <input type="text" id="ingredients" required>
+
+      <label for="instructions">Instructions:</label>
+      <textarea id="instructions" required></textarea>
+
+      <label for="difficulty">Difficulty Level:</label>
+      <select id="difficulty">
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+
+      <button type="submit">Upload Recipe</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 RecipeShare. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Predefined Recipes
+      const recipes = [
+        {
+          name: "Spaghetti Carbonara",
+          image: "https://d3cizcpymoenau.cloudfront.net/images/legacy/37655/SFS_spaghetti_carbonara_CLR-3.jpg",
+          ingredients: "Spaghetti, Eggs, Parmesan, Pancetta, Black Pepper",
+          instructions: "Boil pasta, cook pancetta, mix with eggs and cheese.",
+          difficulty: "Medium",
+        },
+        {
+          name: "Chicken Curry",
+          image: "https://www.licious.in/blog/wp-content/uploads/2020/12/Chicken-Curry-recipe.jpg",
+          ingredients: "Chicken, Curry Paste, Coconut Milk, Rice, Spinach",
+          instructions: "Cook chicken, add curry paste, mix with coconut milk.",
+          difficulty: "Hard",
+        },
+        {
+          name: "Grilled Cheese Sandwich",
+          image: "https://www.walderwellness.com/wp-content/uploads/2019/10/Gourmet-Grilled-Cheese-Sandwich-Walder-Wellness-5.jpg",
+          ingredients: "Bread, Butter, Cheese",
+          instructions: "Butter bread, add cheese, grill on a pan.",
+          difficulty: "Easy",
+        },
+        {
+          name: "Caesar Salad",
+          image: "https://www.cookingclassy.com/wp-content/uploads/2018/06/caesar-salad-12.jpg",
+          ingredients: "Lettuce, Croutons, Caesar Dressing, Parmesan",
+          instructions: "Toss lettuce with croutons, dressing, and cheese.",
+          difficulty: "Easy",
+        },
+        {
+          name: "Beef Tacos",
+          image: "https://www.thecookierookie.com/wp-content/uploads/2020/01/crockpot-taco-meat-beef-tacos-6-of-8-1.jpg",
+          ingredients: "Ground Beef, Taco Shells, Lettuce, Cheese, Salsa",
+          instructions: "Cook beef, assemble tacos with toppings.",
+          difficulty: "Medium",
+        },
+      ];
+
+      const recipesContainer = document.getElementById("recipes-container");
+
+     
+      function displayRecipes() {
+        recipes.forEach((recipe) => {
+          const recipeCard = document.createElement("div");
+          recipeCard.classList.add("recipe-card");
+
+          recipeCard.innerHTML = `
+            <img src="${recipe.image}" alt="${recipe.name}">
+            <h3>${recipe.name}</h3>
+            <p><strong>Ingredients:</strong> ${recipe.ingredients}</p>
+            <p><strong>Instructions:</strong> ${recipe.instructions}</p>
+            <p class="difficulty"><strong>Difficulty:</strong> ${recipe.difficulty}</p>
+          `;
+          
+          recipesContainer.appendChild(recipeCard);
+        });
+      }
+
+      displayRecipes();
+
+      
+      const uploadForm = document.getElementById("upload-form");
+      uploadForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        
+        const recipeName = document.getElementById("recipe-name").value;
+        const recipeImage = document.getElementById("recipe-image").value;
+        const ingredients = document.getElementById("ingredients").value;
+        const instructions = document.getElementById("instructions").value;
+        const difficulty = document.getElementById("difficulty").value;
+
+        const newRecipe = {
+          name: recipeName,
+          image: recipeImage,
+          ingredients: ingredients,
+          instructions: instructions,
+          difficulty: difficulty,
+        };
+
+        recipes.push(newRecipe);
+        recipesContainer.innerHTML = ''; // Clear current recipes
+        displayRecipes(); // Re-display the recipes with the new one
+
+        uploadForm.reset();
+      });
+    });
+  </script>
+</body>
+</html>
